@@ -18,4 +18,6 @@ public interface IGameAPIImplement
     UniTask<APIResponceEnhance> Enhance(int baseId, APIRequestEnhanceMaterials msterials);
     UniTask<APIResponceQuestStart> QuestStart(int questId);
     UniTask<APIResponceQuestResult> QuestResult(int result);
+    UniTask<APIResponceRankingUserInfo> RankingUserInfo();
+
 }

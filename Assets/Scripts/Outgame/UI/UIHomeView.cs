@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 
@@ -19,7 +20,6 @@ namespace Outgame
         public override void Enter()
         {
             base.Enter();
-
             UIStatusBar.Show();
 
             Debug.Log(EventHelper.GetAllOpenedEvent());
@@ -48,7 +48,12 @@ namespace Outgame
         }
 
 
-
+        public void GoEvent()
+        {
+            UIManager.NextView(ViewID.Event);
+            //await GameAPI.API.RankingUserInfo();
+        }
+        
         public void DialogTest()
         {
             UICommonDialog.OpenOKDialog("テスト", "テストダイアログですよ", Test);

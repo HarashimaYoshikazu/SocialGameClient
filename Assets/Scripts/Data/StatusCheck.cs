@@ -25,6 +25,9 @@ public class StatusCheck
 
     GameStatus _status = null;
 
+    /// <summary>
+    /// バージョンチェック
+    /// </summary>
     static public async UniTask<GameStatus> Check()
     {
         //チェックAPI読み込み

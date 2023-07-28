@@ -86,14 +86,14 @@ namespace Network
         /// <summary>
         /// GET通信をする(asyncラッパー)
         /// </summary>
-        /// <param name="uri">通信先のURL</param>
+        /// <param name="url">通信先のURL</param>
         /// <param name="dlg">データ受信コールバック</param>
         /// <param name="opt">ヘッダなど追加で含む情報</param>
-        static public async UniTask<string> GetRequest(string uri, Options opt = null)
+        static public async UniTask<string> GetRequest(string url, Options opt = null)
         {
             CheckWorkerInstance();
             var worker = GetWorker();
-            return await worker.GetRequest(uri, opt);
+            return await worker.GetRequest(url, opt);
         }
 
         /// <summary>
@@ -128,17 +128,17 @@ namespace Network
         /// <summary>
         /// GET通信をする(コールバック運用)
         /// </summary>
-        /// <param name="uri">通信先のURL</param>
+        /// <param name="url">通信先のURL</param>
         /// <param name="dlg">データ受信コールバック</param>
         /// <param name="opt">ヘッダなど追加で含む情報</param>
-        static public void GetRequest(string uri, GetData dlg, Options opt = null)
+        static public void GetRequest(string url, GetData dlg, Options opt = null)
         {
             CheckWorkerInstance();
             UniTask.RunOnThreadPool(async() =>
             {
                 var worker = GetWorker();
-                Debug.Log(uri);
-                string result = await worker.GetRequest(uri, opt);
+                Debug.Log(url);
+                string result = await worker.GetRequest(url, opt);
                 UniTask.Post(() =>
                 {
                     dlg?.Invoke(result);

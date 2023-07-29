@@ -22,7 +22,7 @@ namespace Outgame
             base.Enter();
             UIStatusBar.Hide();
 
-            
+            GetRanking();
             
             Debug.Log(EventHelper.GetAllOpenedEvent());
             Debug.Log(EventHelper.IsEventOpen(1));
@@ -46,7 +46,9 @@ namespace Outgame
 
         private async void GetRanking()
         {
-            await GameAPI.API.RankingUserInfo();
+            APIResponceRankingUserInfo res = await GameAPI.API.RankingUserInfo();
+            _rankingText.text = $"{res.userName[0].name}：{res.point[0].point}pt";
+            Debug.Log($"ポイントと名前{res.point[0].point},{res.userName[0].name}");
         }
     }
 }

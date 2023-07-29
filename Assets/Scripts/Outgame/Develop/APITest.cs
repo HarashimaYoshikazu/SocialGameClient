@@ -41,7 +41,7 @@ namespace Outgame
             //var cards = UserDataCache.Load<APIResponceGetCards>("Cards");
             //if (cards != null) return;
 
-            _name = data.name;
+            _name = data.userName;
             _userId = data.id;
 
             GameAPI.API.GetCards((cds) =>

@@ -19,5 +19,7 @@ public interface IGameAPIImplement
     UniTask<APIResponceQuestStart> QuestStart(int questId);
     UniTask<APIResponceQuestResult> QuestResult(int result);
     UniTask<APIResponceRankingUserInfo> RankingUserInfo();
-
+    UniTask<APIResponceRankingLeaderboard> RankingLeaderboard();
+    UniTask<APIResponceRankingUpdate> RankingUpdate();
+    
 }

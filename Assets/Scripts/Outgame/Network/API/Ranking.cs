@@ -29,15 +29,17 @@ namespace  Outgame
         public string name;
     }
 
+    [Serializable]
     public class APIResponceRankingLeaderboard : APIResponceBase
     {   
+        //public List<PointData>
+    }
+
+    public class RankingInfo
+    {
         
     }
-    public class APIResponceRankingUpdate : APIResponceBase
-    {   
-        
-    }
-    
+
     public partial class NodeJSImplement : IGameAPIImplement
     {
         public async UniTask<APIResponceRankingUserInfo> RankingUserInfo()
@@ -56,12 +58,20 @@ namespace  Outgame
             return res;
         }
         
-        public async UniTask<APIResponceRankingUpdate> RankingUpdate()
+        public async UniTask<APIResponceBase> RankingUpdate()
         {
             string url = string.Format("{0}/ranking/update", GameSetting.GameAPIURI);
             APIRequestBase request = CreateRequest<APIRequestBase>();
             string json = await PostRequest(url,request);
-            APIResponceRankingUpdate res = GetPacketBody<APIResponceRankingUpdate>(json);
+            APIResponceBase res = GetPacketBody<APIResponceBase>(json);
+            return res;
+        }
+        public async UniTask<APIResponceBase> RankingJoin()
+        {
+            string url = string.Format("{0}/ranking/join", GameSetting.GameAPIURI);
+            APIRequestBase request = CreateRequest<APIRequestBase>();
+            string json = await PostRequest(url,request);
+            APIResponceBase res = GetPacketBody<APIResponceBase>(json);
             return res;
         }
     }
@@ -78,9 +88,13 @@ namespace  Outgame
         {
             return await UniTask.RunOnThreadPool(() => default(APIResponceRankingLeaderboard));
         }
-        public async UniTask<APIResponceRankingUpdate> RankingUpdate()
+        public async UniTask<APIResponceBase> RankingUpdate()
         {
-            return await UniTask.RunOnThreadPool(() => default(APIResponceRankingUpdate));
+            return await UniTask.RunOnThreadPool(() => default(APIResponceBase));
+        }
+        public async UniTask<APIResponceBase> RankingJoin()
+        {
+            return await UniTask.RunOnThreadPool(() => default(APIResponceBase));
         }
     }
 }
